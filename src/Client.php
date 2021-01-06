@@ -40,6 +40,16 @@ if (!class_exists('\phpseclib\Crypt\RSA') && !class_exists('Crypt_RSA')) {
 }
 
 /**
+ * Require the CURL and JSON PHP extensions to be installed
+ */
+if (!function_exists('curl_init')) {
+    throw new OpenIDConnectClientException('OpenIDConnect needs the CURL PHP extension.');
+}
+if (!function_exists('json_decode')) {
+    throw new OpenIDConnectClientException('OpenIDConnect needs the JSON PHP extension.');
+}
+
+/**
  * A wrapper around base64_decode which decodes Base64URL-encoded data,
  * which is not the same alphabet as base64.
  * @param string $base64url
@@ -64,16 +74,6 @@ function b64url2b64($base64url) {
         $base64url .= str_repeat('=', 4 - $padding);
     }
     return strtr($base64url, '-_', '+/');
-}
-
-/**
- * Require the CURL and JSON PHP extensions to be installed
- */
-if (!function_exists('curl_init')) {
-    throw new OpenIDConnectClientException('OpenIDConnect needs the CURL PHP extension.');
-}
-if (!function_exists('json_decode')) {
-    throw new OpenIDConnectClientException('OpenIDConnect needs the JSON PHP extension.');
 }
 
 /**
