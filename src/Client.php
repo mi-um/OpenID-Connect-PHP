@@ -3,7 +3,7 @@
  *
  * Copyright MITRE 2020
  *
- * OpenIDConnectClient for PHP5
+ * Client for PHP5
  * Author: Michael Jett <mjett@mitre.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -21,6 +21,10 @@
  */
 
 namespace Jumbojett;
+
+use Jumbojett\oidc\ClientException as OpenIDConnectClientException;
+use Error;
+use Exception;
 
 /**
  *
@@ -62,15 +66,6 @@ function b64url2b64($base64url) {
     return strtr($base64url, '-_', '+/');
 }
 
-
-/**
- * OpenIDConnect Exception Class
- */
-class OpenIDConnectClientException extends \Exception
-{
-
-}
-
 /**
  * Require the CURL and JSON PHP extensions to be installed
  */
@@ -86,7 +81,7 @@ if (!function_exists('json_decode')) {
  * Please note this class stores nonces by default in $_SESSION['openid_connect_nonce']
  *
  */
-class OpenIDConnectClient
+class Client
 {
 
     /**
