@@ -36,7 +36,6 @@ require_once __DIR__ . '/Helper.php';
  * phpseclib is required to validate the signatures of some tokens.
  * It can be downloaded from: http://phpseclib.sourceforge.net/
  */
-
 if (!class_exists('\phpseclib\Crypt\RSA')) {
     user_error('Unable to find phpseclib Crypt/RSA.php.  Ensure phpseclib is installed and in include_path before you include this file');
 }
@@ -52,9 +51,9 @@ if (!function_exists('json_decode')) {
 }
 
 /**
+ * The Client that's supposed to handle all the OIDC logic.
  *
  * Please note this class stores nonces by default in $_SESSION['openid_connect_nonce']
- *
  */
 class Client
 {
