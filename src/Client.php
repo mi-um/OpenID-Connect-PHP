@@ -37,7 +37,7 @@ require_once __DIR__ . '/Helper.php';
  * It can be downloaded from: http://phpseclib.sourceforge.net/
  */
 
-if (!class_exists('\phpseclib\Crypt\RSA') && !class_exists('Crypt_RSA')) {
+if (!class_exists('\phpseclib\Crypt\RSA')) {
     user_error('Unable to find phpseclib Crypt/RSA.php.  Ensure phpseclib is installed and in include_path before you include this file');
 }
 
@@ -843,8 +843,8 @@ class Client
      * @throws OpenIDConnectClientException
      */
     private function verifyRSAJWTsignature($hashtype, $key, $payload, $signature, $signatureType) {
-        if (!class_exists('\phpseclib\Crypt\RSA') && !class_exists('Crypt_RSA')) {
-            throw new OpenIDConnectClientException('Crypt_RSA support unavailable.');
+        if (!class_exists('\phpseclib\Crypt\RSA')) {
+            throw new OpenIDConnectClientException('Crypt\RSA support unavailable.');
         }
         if (!(property_exists($key, 'n') && property_exists($key, 'e'))) {
             throw new OpenIDConnectClientException('Malformed key object');
@@ -857,15 +857,6 @@ class Client
             '  <Modulus>' . b64url2b64($key->n) . "</Modulus>\r\n" .
             '  <Exponent>' . b64url2b64($key->e) . "</Exponent>\r\n" .
             '</RSAKeyValue>';
-        if(class_exists('Crypt_RSA', false)) {
-            $rsa = new Crypt_RSA();
-            $rsa->setHash($hashtype);
-            if ($signatureType === 'PSS') {
-                $rsa->setMGFHash($hashtype);
-            }
-            $rsa->loadKey($public_key_xml, Crypt_RSA::PUBLIC_FORMAT_XML);
-            $rsa->signatureMode = $signatureType === 'PSS' ? Crypt_RSA::SIGNATURE_PSS : Crypt_RSA::SIGNATURE_PKCS1;
-        } else {
             $rsa = new \phpseclib\Crypt\RSA();
             $rsa->setHash($hashtype);
             if ($signatureType === 'PSS') {
@@ -873,7 +864,6 @@ class Client
             }
             $rsa->loadKey($public_key_xml, \phpseclib\Crypt\RSA::PUBLIC_FORMAT_XML);
             $rsa->signatureMode = $signatureType === 'PSS' ? \phpseclib\Crypt\RSA::SIGNATURE_PSS : \phpseclib\Crypt\RSA::SIGNATURE_PKCS1;
-        }
         return $rsa->verify($payload, $signature);
     }
 
@@ -1464,7 +1454,7 @@ class Client
      * @return bool
      */
     public function canVerifySignatures() {
-        return class_exists('\phpseclib\Crypt\RSA') || class_exists('Crypt_RSA');
+        return class_exists('\phpseclib\Crypt\RSA');
     }
 
     /**
