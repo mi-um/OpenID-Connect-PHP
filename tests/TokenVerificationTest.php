@@ -1,14 +1,15 @@
 <?php
 
 
-use Jumbojett\OpenIDConnectClient;
+use Jumbojett\oidc\Client as OpenIDConnectClient;
+use Jumbojett\oidc\ClientException;
 
 class TokenVerificationTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @param $alg
      * @param $jwt
-     * @throws \Jumbojett\OpenIDConnectClientException
+     * @throws ClientException
      * @dataProvider providesTokens
      */
     public function testTokenVerification($alg, $jwt)
