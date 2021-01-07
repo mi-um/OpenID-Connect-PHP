@@ -14,13 +14,12 @@
 		"roave/security-advisories" : "dev-master"
 	},
 	"minimum-stability": "dev",
+        "prefer-stable" : true,
 	"archive" : {
 		"exclude" : [
 			".*"
 		]
 	},
-        "minimum-stability" : "dev",
-        "prefer-stable" : true,
 	"autoload" : {
 		"psr-4" : {
 			"mium\\oidc\\" : "src"
