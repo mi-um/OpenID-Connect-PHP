@@ -1,6 +1,6 @@
 <?php 
 
-namespace Jumbojett\oidc;
+namespace mium\oidc;
 
 /**
  * OpenIDConnect Exception Class

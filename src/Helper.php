@@ -1,5 +1,5 @@
 <?php
-namespace Jumbojett\oidc;
+namespace mium\oidc;
 
 if (false === function_exists('base64url_decode')) {
 

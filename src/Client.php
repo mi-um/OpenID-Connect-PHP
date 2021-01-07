@@ -20,11 +20,11 @@
  *
  */
 
-namespace Jumbojett\oidc;
+namespace mium\oidc;
 
-use Jumbojett\oidc\ClientException as OpenIDConnectClientException;
 use Error;
 use Exception;
+use mium\oidc\ClientException as OpenIDConnectClientException;
 
 require_once __DIR__ . '/Helper.php';
 
